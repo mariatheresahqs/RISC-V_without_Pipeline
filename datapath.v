@@ -14,4 +14,6 @@ module datapath (clock, Reset, NextPC, ALUResult, Instruction);
   PC PC_datapath (.PC(PC), .Reset(Reset), .NextPC(NextPC));
   Sum4 PC_4 (.PC(NextPC), .Sum(PC));
   ResultPC PC_Branch (.PC(PC), .ShiftValue(ShiftValue), .Sum(Sum), .ANDBranch(ANDBranch), .clock(clock));
+ // InstructionMemory Instruction_Value();
+  Control Control_Values (.OpCode(Instruction[6:0]), .ALUSrc(ALUSrc), .MemtoReg(MemtoReg), .RegWrite(RegWrite), .MemRead(MemRead), .MemWrite(MemWrite), .Branch(Branch), .ALUOp(ALUOp));
 endmodule //
