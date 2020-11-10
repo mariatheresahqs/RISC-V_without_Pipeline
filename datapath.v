@@ -1,4 +1,5 @@
 `include "PC.v"
+`include "Control.v"
 
 module datapath (clock, Reset, NextPC, ALUResult, Instruction);
   input wire clock, Reset;
