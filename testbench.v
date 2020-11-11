@@ -2,7 +2,7 @@
 
 module testbench ();
   reg Clock, Reset;
-  wire [31:0]PC, ALUResult, Instruction;
+  wire [31:0]PC, ALUResult, Instruction; // Mostrar apenas as 32 bits
 
   datapath Call (.clock(Clock), .Reset(Reset), .NextPC(PC), .ALUResult(ALUResult), .Instruction(Instruction));
 
@@ -126,3 +126,4 @@ module testbench ();
     $finish;
   end
 endmodule //
+
