@@ -1,11 +1,11 @@
-module InstructionMemory (AddressPC, Instruction);
-  input wire [31:0]AddressPC;
-  output reg [31:0]Instruction;
+module InstructionMemory (addressPC, instruction);
+  input wire [31:0]addressPC;
+  output reg [31:0]instruction;
 
   always @ (*) begin
-    case (AddressPC)
+    case (addressPC)
 
-      32'b00000000000000000000000000000000: Instruction <= 32'b00000000000100000000000100110011;// Tipo R - add x2, x0, x1 
+      32'b00000000000000000000000000000000: instruction <= 32'b00000000000100000000000100110011;// Tipo R - add x2, x0, x1 
 
     endcase
   end
