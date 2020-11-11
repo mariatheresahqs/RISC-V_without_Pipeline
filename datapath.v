@@ -4,9 +4,9 @@
 
 module datapath (clk, reset, nextPC, ALUResult, instruction);
   input wire clk, reset;
-  output wire [31:0]nextPC, instruction, ALUResult;
-  wire [31:0]resultPC, sum;
-  wire [31:0]signExtend, Data1, Data2, DataTemp, WriteData, shiftValue, ReadData, PC;
+  output wire [63:0]nextPC, instruction, ALUResult; // Alterar tamanho da instrucao ao imprimir
+  wire [63:0]resultPC, sum;
+  wire [63:0]signExtend, Data1, Data2, DataTemp, WriteData, shiftValue, ReadData, PC;
   wire [4:0]regWrite;
   wire count, ANDBranch, zero;
   wire ALUSrc, MemtoReg, MemWrite, MemRead, RegWrite, Branch;  // instrucoes de controle
