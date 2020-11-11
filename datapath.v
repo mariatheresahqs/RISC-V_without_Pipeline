@@ -2,23 +2,30 @@
 `include "InstructionMemory.v"
 `include "Control.v"
 
-module datapath (clock, Reset, NextPC, ALUResult, Instruction);
-  input wire clock, Reset;
-  output wire [31:0]NextPC, Instruction, ALUResult; // instrucoes de saida com 32 bits
-  wire [31:0]ResultPC, Sum;
-  wire [31:0]SignExtend, Data1, Data2, DataTemp, WriteData, ShiftValue, ReadData, PC;
-  wire [4:0]RegWrite;
-  wire Count, ANDBranch, Zero;
+module datapath (clk, reset, nextPC, ALUResult, instruction);
+  input wire clk, reset;
+  output wire [31:0]nextPC, instruction, ALUResult;
+  wire [31:0]resultPC, sum;
+  wire [31:0]signExtend, Data1, Data2, DataTemp, WriteData, shiftValue, ReadData, PC;
+  wire [4:0]regWrite;
+  wire count, ANDBranch, zero;
   wire ALUSrc, MemtoReg, MemWrite, MemRead, RegWrite, Branch;  // instrucoes de controle
-  wire [1:0]ALUOp;  // instrucoes de controle
+  wire [1:0]ALUOp; // instrucoes de controle
   wire [3:0]ALUCtrl; // temporariamente pra nao esquecer. CHECAR os bits
 
-// PC
-  PC PC_datapath (.PC(PC), .Reset(Reset), .NextPC(NextPC));
-  Sum4 PC_4 (.PC(NextPC), .Sum(PC));
-  ResultPC PC_Branch (.PC(PC), .ShiftValue(ShiftValue), .Sum(Sum), .ANDBranch(ANDBranch), .clock(clock));
-// Memoria de Instrucao
-  InstructionMemory Instruction_Value (.AddressPC(NextPC), .Instruction(Instruction));
-// Controle
-  Control Control_Values (.OpCode(Instruction[6:0]), .ALUSrc(ALUSrc), .MemtoReg(MemtoReg), .RegWrite(RegWrite), .MemRead(MemRead), .MemWrite(MemWrite), .Branch(Branch), .ALUOp(ALUOp));
-endmodule //
+  //-----------------------------------------------------------------
+  // Program Counter Modules
+  //-----------------------------------------------------------------
+  PC PC_datapath (.PC(PC), .reset(reset), .nextPC(nextPC));
+  Sum4 PC_4 (.PC(nextPC), .sum(PC));
+  ResultPC PC_Branch (.PC(PC), .shiftValue(shiftValue), .sum(sum), .ANDBranch(ANDBranch), .clk(clk));
+  ShiftLeft ImmShiftedOneLeft (.signExtend(signExtend), .result(shiftValue));
+  //-----------------------------------------------------------------
+  // Memory Instruction Modules
+  //-----------------------------------------------------------------
+  InstructionMemory Instruction_Value (.addressPC(nextPC), .instruction(instruction));
+  //-----------------------------------------------------------------
+  // Control Modules
+  //-----------------------------------------------------------------
+  Control Control_Values (.OpCode(instruction[6:0]), .ALUSrc(ALUSrc), .MemtoReg(MemtoReg), .RegWrite(RegWrite), .MemRead(MemRead), .MemWrite(MemWrite), .Branch(Branch), .ALUOp(ALUOp));
+endmodule
