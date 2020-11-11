@@ -12,4 +12,4 @@ module SignExtend(instruction, signExtend);
   end
 endmodule
 // .in ({ {22{1'b0}}, valueA}) //  outra forma
-// signExtend[63:32] <= 32'b000000000000000; // outra forma - restante dos bits preenchidos por extensao de sinal
+// signExtend[63:32] <= 32'b00000000000000000000000000000000; // outra forma - restante dos bits preenchidos por extensao de sinal
