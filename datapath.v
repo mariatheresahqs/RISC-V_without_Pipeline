@@ -4,7 +4,8 @@
 
 module datapath (clk, reset, nextPC, ALUResult, instruction);
   input wire clk, reset;
-  output wire [63:0]nextPC, instruction, ALUResult; // Alterar tamanho da instrucao ao imprimir
+  output wire [63:0]nextPC, ALUResult; // Alterar tamanho da instrucao ao imprimir
+  output wire[31:0]instruction;
   wire [63:0]resultPC, sum;
   wire [63:0]signExtend, Data1, Data2, DataTemp, WriteData, shiftValue, ReadData, PC;
   wire [4:0]regWrite;
@@ -28,4 +29,8 @@ module datapath (clk, reset, nextPC, ALUResult, instruction);
   // Control Modules
   //-----------------------------------------------------------------
   Control Control_Values (.OpCode(instruction[6:0]), .ALUSrc(ALUSrc), .MemtoReg(MemtoReg), .RegWrite(RegWrite), .MemRead(MemRead), .MemWrite(MemWrite), .Branch(Branch), .ALUOp(ALUOp));
+  //-----------------------------------------------------------------
+  // SingExtend Modules
+  //-----------------------------------------------------------------
+  SignExtend ImmGen (.instruction(instruction[31:0]), .signExtend(signExtend));
 endmodule
