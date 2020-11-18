@@ -1,27 +1,53 @@
-module InstructionMemory (Control_RegWrite, instruction, reg1, reg2, WriteRegister, WriteData, ReadData1, ReadData2);
-	
-	input wire [4:0]reg1;
-	input wire [4:0]reg2;
-	input wire [4:0]WriteRegister;
-	input wire [63:0]WriteData; // n tenho certeza da quantidade de bits
+module Registers (ReadReg1, ReadReg2, WriteReg, ReadData1, ReadData2, RegWrite, WriteData, clk, reset);
 
-	output reg [63:0]ReadData1;
-	output reg [63:0]ReadData2;
-
-	always @(*) begin
-		reg1 <= [19:15]instruction;
-		reg2 <= [24:20]instruction;
-		WriteRegister <= [11:7]instruction;
-		//WriteData nao sei o que fazer	
-
-
-		ReadData1 <= reg1;
-		ReadData1 <= reg2;
-
-		//tem que ver a questao do mux 
-
-	end
-endmodule
-
-
+  	input wire [4:0]ReadReg1, ReadReg2, WriteReg; // registradores da instrucao
+ 	input wire [63:0]WriteData; // resultado de retorno ao final do ciclo, se RegWrite for 1
+  	input wire RegWrite, clk, reset; // sinal de controle de escrita e clock para acionar a escrita
+    
+    reg [63:0] regs [63:0]; // para preencher os 32 vetores de registradores
+    output reg [63:0]ReadData1, ReadData2; // saida dos registradores da instrucao, agora em 64bits
+    
+  	always @(*) begin
+        if (reset) begin // tem que testar
+            regs[0] <= 64'd0;
+            regs[1] <= 64'd1;
+            regs[2] <= 64'd2;
+            regs[3] <= 64'd3;
+            regs[4] <= 64'd4;
+            regs[5] <= 64'd5;
+            regs[6] <= 64'd6;
+            regs[7] <= 64'd7;
+            regs[8] <= 64'd8;
+            regs[9] <= 64'd9;
+            regs[10] <= 64'd10;
+            regs[11] <= 64'd11;
+            regs[12] <= 64'd12;
+            regs[13] <= 64'd13;
+            regs[14] <= 64'd14;
+            regs[15] <= 64'd15;
+            regs[16] <= 64'd16;
+            regs[17] <= 64'd17;
+            regs[18] <= 64'd18;
+            regs[19] <= 64'd19;
+            regs[20] <= 64'd20;
+            regs[21] <= 64'd21;
+            regs[22] <= 64'd22;
+            regs[23] <= 64'd16;
+            regs[24] <= 64'd24;
+            regs[25] <= 64'd25;
+            regs[26] <= 64'd26;
+            regs[27] <= 64'd27;
+            regs[28] <= 64'd28;
+            regs[29] <= 64'd29;
+            regs[30] <= 64'd30;
+            regs[31] <= 64'd31;
+        end
+        else begin
+            ReadData1 <= regs[ReadReg1];
+            ReadData2 <= regs[ReadReg2];
+            if(RegWrite) begin
+                regs[WriteReg] <= WriteData;
+            end
+  	end
+ endmodule
 
