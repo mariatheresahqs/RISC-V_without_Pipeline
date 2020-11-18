@@ -35,6 +35,17 @@ module ShiftLeft (signExtend, result);
   end
 endmodule
 
+
+module AND(Zero, Branch, ANDResult);
+  input wire Zero, Branch;
+  output reg ANDResult;
+
+  always @(*)begin
+    ANDResult <= Zero & Branch;
+  end
+endmodule
+
+
 module ResultPC (PC, shiftValue, sum, ANDBranch, clk);  // desempenhara o papel do AddSum(pc + shiftValue) + Mux(ANDBranch "flag")
   input wire [63:0] PC, shiftValue; // valores que sao recebidos pelo AddSum
   input wire ANDBranch, clk;

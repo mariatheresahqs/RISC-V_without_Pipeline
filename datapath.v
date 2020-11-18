@@ -24,6 +24,7 @@ module datapath (clk, reset, nextPC, ALUResult, instruction);
   Sum4 PC_4 (.PC(nextPC), .sum(PC));
   ResultPC PC_Branch (.PC(PC), .shiftValue(shiftValue), .sum(sum), .ANDBranch(ANDBranch), .clk(clk));
   ShiftLeft ImmShiftedOneLeft (.signExtend(signExtend), .result(shiftValue));
+  module AND(Zero, Branch, ANDResult);
   //-----------------------------------------------------------------
   // Memory Instruction Modules
   //-----------------------------------------------------------------
@@ -44,5 +45,10 @@ module datapath (clk, reset, nextPC, ALUResult, instruction);
   // ALU Modules
   //-----------------------------------------------------------------
   ALUControl ALUControl_values (.Funct7(instruction[31:25]), .Funct3(instruction[14:12]), .ALUOp(ALUOp), .ALUCtrl(ALUCtrl));
-  
+  //-----------------------------------------------------------------
+  //
+  //-----------------------------------------------------------------
+  module muxALU(ReadData2, signExtended, ALUSrc, muxResult);
+  module ALUValues (ReadData1, muxResult, ALUCtrl, ALUResult, Zero);
+
 endmodule

@@ -4,7 +4,7 @@ module Registers (ReadReg1, ReadReg2, WriteReg, ReadData1, ReadData2, RegWrite, 
  	input wire [63:0]WriteData; // resultado de retorno ao final do ciclo, se RegWrite for 1
   	input wire RegWrite, clk, reset; // sinal de controle de escrita e clock para acionar a escrita
     
-    reg [63:0] regs [63:0]; // para preencher os 32 vetores de registradores
+    reg [31:0] regs [63:0]; // para preencher os 32 vetores de registradores
     output reg [63:0]ReadData1, ReadData2; // saida dos registradores da instrucao, agora em 64bits
     
   	always @(*) begin
@@ -50,4 +50,3 @@ module Registers (ReadReg1, ReadReg2, WriteReg, ReadData1, ReadData2, RegWrite, 
             end
   	end
  endmodule
-
