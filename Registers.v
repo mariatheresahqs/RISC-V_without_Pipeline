@@ -1,8 +1,8 @@
-module Registers (ReadReg1, ReadReg2, WriteReg, ReadData1, ReadData2, RegWrite, WriteData, clk, reset);
+module Registers (ReadReg1, ReadReg2, RegWrite, ReadData1, ReadData2, WriteReg, WriteData, clk, reset);
 
-  	input wire [4:0]ReadReg1, ReadReg2, WriteReg; // registradores da instrucao
+  	input wire [4:0]ReadReg1, ReadReg2, RegWrite; // registradores da instrucao
  	input wire [63:0]WriteData; // resultado de retorno ao final do ciclo, se RegWrite for 1
-  	input wire RegWrite, clk, reset; // sinal de controle de escrita e clock para acionar a escrita
+  	input wire WriteReg, clk, reset; // sinal de controle de escrita e clock para acionar a escrita
     
     reg [31:0] regs [63:0]; // para preencher os 32 vetores de registradores
     output reg [63:0]ReadData1, ReadData2; // saida dos registradores da instrucao, agora em 64bits
@@ -45,8 +45,9 @@ module Registers (ReadReg1, ReadReg2, WriteReg, ReadData1, ReadData2, RegWrite, 
         else begin
             ReadData1 <= regs[ReadReg1];
             ReadData2 <= regs[ReadReg2];
-            if(RegWrite) begin
-                regs[WriteReg] <= WriteData;
+            if(WriteReg) begin
+                regs[RegWrite] <= WriteData;
             end
+        end
   	end
  endmodule

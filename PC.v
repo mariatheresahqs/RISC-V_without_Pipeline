@@ -36,7 +36,7 @@ module ShiftLeft (signExtend, result);
 endmodule
 
 
-module AND(Zero, Branch, ANDResult);
+module BranchAND(Zero, Branch, ANDResult);
   input wire Zero, Branch;
   output reg ANDResult;
 

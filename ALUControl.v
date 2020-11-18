@@ -1,5 +1,6 @@
 module ALUControl (Funct7, Funct3, ALUOp, ALUCtrl);
   input wire [6:0]Funct7;
+  input wire [2:0]Funct3;
   input wire [1:0]ALUOp;
   output reg [3:0]ALUCtrl;
 

@@ -1,6 +1,8 @@
+`include "ALU.v"
 `include "PC.v"
 `include "InstructionMemory.v"
 `include "Control.v"
+`include "DataMemory.v"
 `include "Registers.v"
 `include "SignExtend.v"
 `include "ALUControl.v"
@@ -9,13 +11,13 @@ module datapath (clk, reset, nextPC, ALUResult, instruction);
   input wire clk, reset;
   output wire [63:0]nextPC, ALUResult; // Alterar tamanho da instrucao ao imprimir
   output wire[31:0]instruction;
-  wire [63:0]resultPC, sum;
+  wire [63:0]resultPC, sum, muxResult, muxDataResult;
   wire [63:0]signExtend, ReadData1, ReadData2, DataTemp, WriteData, shiftValue, ReadData, PC;
-  wire [4:0]regWrite;
-  wire count, ANDBranch, zero;
+  wire [4:0]WriteReg;
+  wire ANDBranch, Zero, ANDResult;
   wire ALUSrc, MemtoReg, MemWrite, MemRead, RegWrite, Branch;  // instrucoes de controle
   wire [1:0]ALUOp; // instrucoes de controle
-  wire [3:0]ALUCtrl; // temporariamente pra nao esquecer. CHECAR os bits
+  wire [3:0]ALUCtrl; 
 
   //-----------------------------------------------------------------
   // Program Counter Modules
@@ -24,11 +26,11 @@ module datapath (clk, reset, nextPC, ALUResult, instruction);
   Sum4 PC_4 (.PC(nextPC), .sum(PC));
   ResultPC PC_Branch (.PC(PC), .shiftValue(shiftValue), .sum(sum), .ANDBranch(ANDBranch), .clk(clk));
   ShiftLeft ImmShiftedOneLeft (.signExtend(signExtend), .result(shiftValue));
-  module AND(Zero, Branch, ANDResult);
+  BranchAND BranchAND(.Zero(Zero), .Branch(Branch), .ANDResult(ANDResult));
   //-----------------------------------------------------------------
   // Memory Instruction Modules
   //-----------------------------------------------------------------
-  InstructionMemory Instruction_Value (.addressPC(nextPC), .instruction(instruction));
+  InstructionMemory InstructionMemory (.PC(nextPC), .instruction(instruction));
   //-----------------------------------------------------------------
   // Control Modules
   //-----------------------------------------------------------------
@@ -40,15 +42,19 @@ module datapath (clk, reset, nextPC, ALUResult, instruction);
   //-----------------------------------------------------------------
   // Registers Modules
   //-----------------------------------------------------------------
-  Registers Regs (.ReadReg1(instruction[25:21]), .ReadReg2(instruction[20:16]), .WriteReg(WriteReg), .ReadData1(ReadData1), .ReadData2(ReadData2), .RegWrite(RegWrite), .WriteData(WriteData), .clk(clk), .reset(reset));
+  Registers Regs (.ReadReg1(instruction[25:21]), .ReadReg2(instruction[20:16]), .RegWrite(RegWrite), .ReadData1(ReadData1), .ReadData2(ReadData2), .WriteReg(WriteReg), .WriteData(muxDataResult), .clk(clk), .reset(reset));
   //-----------------------------------------------------------------
   // ALU Modules
   //-----------------------------------------------------------------
-  ALUControl ALUControl_values (.Funct7(instruction[31:25]), .Funct3(instruction[14:12]), .ALUOp(ALUOp), .ALUCtrl(ALUCtrl));
+  ALUValues ALUValues (.ReadData1(ReadData1), .muxResult(muxResult), .ALUCtrl(ALUCtrl), .ALUResult(ALUResult), .Zero(Zero));
+  ALUControl ALUControl (.Funct7(instruction[31:25]), .Funct3(instruction[14:12]), .ALUOp(ALUOp), .ALUCtrl(ALUCtrl));
+  muxALU muxALU(.ReadData2(ReadData2), .signExtend(signExtend), .ALUSrc(ALUSrc), .muxResult(muxResult));
   //-----------------------------------------------------------------
-  //
+  // Data Memory
   //-----------------------------------------------------------------
-  module muxALU(ReadData2, signExtended, ALUSrc, muxResult);
-  module ALUValues (ReadData1, muxResult, ALUCtrl, ALUResult, Zero);
+  DataMemory DataMemory(.ALUResult(ALUResult), .ReadData2(ReadData2), .MemWrite(MemWrite), .MemRead(MemRead), .ReadData(ReadData), .clk(clk), .reset(reset));
+  muxDataMem muxDataMem(.ReadData(ReadData), .ALUResult(ALUResult), .MemtoReg(MemtoReg), .muxDataResult(muxDataResult));
 
 endmodule
+
+//continuar a partir de registers regs - problemas RegWrite e WriteReg

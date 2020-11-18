@@ -53,8 +53,8 @@ module DataMemory(ALUResult, ReadData2, MemWrite, MemRead, ReadData, clk, reset)
 
     end
 
+endmodule
 
-endmodule;
 
 module muxDataMem(ReadData, ALUResult, MemtoReg, muxDataResult);
 
@@ -62,6 +62,15 @@ module muxDataMem(ReadData, ALUResult, MemtoReg, muxDataResult);
     input wire MemtoReg;
     output reg [63:0]muxDataResult;
 
-    
+    always @(*)begin
+        if(MemtoReg)begin
+            muxDataResult <= ReadData;
+        end
+        else begin
+            muxDataResult <= ALUResult;
+        end
+    end
 
 endmodule
+
+//regs[WriteReg] <= muxResult; muxResult == WriteData

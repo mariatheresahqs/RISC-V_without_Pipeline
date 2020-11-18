@@ -1,15 +1,15 @@
 
-module muxALU(ReadData2, signExtended, ALUSrc, muxResult);
+module muxALU(ReadData2, signExtend, ALUSrc, muxResult);
 
-	input wire [63:0]ReadData2, signExtended;
+	input wire [63:0]ReadData2, signExtend;
 	input wire ALUSrc;
 	output reg [63:0] muxResult;
 
-	always @(ReadData2, signExtended, ALUSrc) begin
-		case(ALUSrc) begin
+	always @(ReadData2, signExtend, ALUSrc) begin
+		case(ALUSrc)
 			0: muxResult <= ReadData2;
-			1: muxResult <= signExtended;
-		end
+			1: muxResult <= signExtend;
+		endcase
 	end
 
 endmodule
