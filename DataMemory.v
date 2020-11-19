@@ -6,6 +6,7 @@ module DataMemory(ALUResult, ReadData2, MemWrite, MemRead, ReadData, clk, reset)
     reg [31:0]MemReg[63:0];
 
 
+
     always @(posedge clk) begin
         if (reset) begin // tem que testar
             MemReg[0] <= 64'd0;
@@ -44,7 +45,8 @@ module DataMemory(ALUResult, ReadData2, MemWrite, MemRead, ReadData, clk, reset)
 
         else begin
             if(MemWrite) begin //load
-                MemReg[ALUResult] <= WriteData; //Registrador[endereco] = Dado
+                //MemReg[ALUResult] <= WriteData; //Registrador[endereco] = Dado
+                MemReg[ALUResult] <= ReadData2; //ReadData2 e o WriteData do diagrama
             end
             else if(MemRead) begin //store
                 ReadData <= MemReg[ALUResult]; //Memoria = Registrador[endereco]

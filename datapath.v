@@ -42,7 +42,7 @@ module datapath (clk, reset, nextPC, ALUResult, instruction);
   //-----------------------------------------------------------------
   // Registers Modules
   //-----------------------------------------------------------------
-  Registers Regs (.ReadReg1(instruction[25:21]), .ReadReg2(instruction[20:16]), .RegWrite(RegWrite), .ReadData1(ReadData1), .ReadData2(ReadData2), .WriteReg(WriteReg), .WriteData(muxDataResult), .clk(clk), .reset(reset));
+  Registers Regs (.ReadReg1(instruction[25:21]), .ReadReg2(instruction[20:16]), .RegWrite(WriteReg), .ReadData1(ReadData1), .ReadData2(ReadData2), .WriteReg(RegWrite), .WriteData(muxDataResult), .clk(clk), .reset(reset));
   //-----------------------------------------------------------------
   // ALU Modules
   //-----------------------------------------------------------------
