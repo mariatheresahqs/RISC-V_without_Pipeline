@@ -1,0 +1,528 @@
+$date
+	Thu Nov 19 13:57:11 2020
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module testbench $end
+$var wire 32 ! instruction [31:0] $end
+$var wire 64 " PC [63:0] $end
+$var wire 64 # ALUResult [63:0] $end
+$var reg 1 $ clk $end
+$var reg 1 % reset $end
+$scope module Call $end
+$var wire 1 & ANDBranch $end
+$var wire 64 ' PC [63:0] $end
+$var wire 5 ( WriteReg [4:0] $end
+$var wire 1 $ clk $end
+$var wire 1 % reset $end
+$var wire 64 ) sum [63:0] $end
+$var wire 64 * signExtend [63:0] $end
+$var wire 64 + shiftValue [63:0] $end
+$var wire 64 , nextPC [63:0] $end
+$var wire 64 - muxResult [63:0] $end
+$var wire 64 . muxDataResult [63:0] $end
+$var wire 32 / instruction [31:0] $end
+$var wire 1 0 Zero $end
+$var wire 1 1 RegWrite $end
+$var wire 64 2 ReadData2 [63:0] $end
+$var wire 64 3 ReadData1 [63:0] $end
+$var wire 64 4 ReadData [63:0] $end
+$var wire 1 5 MemtoReg $end
+$var wire 1 6 MemWrite $end
+$var wire 1 7 MemRead $end
+$var wire 1 8 Branch $end
+$var wire 1 9 ANDResult $end
+$var wire 1 : ALUSrc $end
+$var wire 64 ; ALUResult [63:0] $end
+$var wire 2 < ALUOp [1:0] $end
+$var wire 4 = ALUCtrl [3:0] $end
+$scope module ALUControl $end
+$var wire 3 > Funct3 [2:0] $end
+$var wire 7 ? Funct7 [6:0] $end
+$var wire 2 @ ALUOp [1:0] $end
+$var reg 4 A ALUCtrl [3:0] $end
+$upscope $end
+$scope module ALUValues $end
+$var wire 4 B ALUCtrl [3:0] $end
+$var wire 64 C muxResult [63:0] $end
+$var wire 64 D ReadData1 [63:0] $end
+$var reg 64 E ALUResult [63:0] $end
+$var reg 1 0 Zero $end
+$upscope $end
+$scope module BranchAND $end
+$var wire 1 0 Zero $end
+$var wire 1 8 Branch $end
+$var reg 1 9 ANDResult $end
+$upscope $end
+$scope module Control_Values $end
+$var wire 7 F OpCode [6:0] $end
+$var reg 2 G ALUOp [1:0] $end
+$var reg 1 : ALUSrc $end
+$var reg 1 8 Branch $end
+$var reg 1 7 MemRead $end
+$var reg 1 6 MemWrite $end
+$var reg 1 5 MemtoReg $end
+$var reg 1 1 RegWrite $end
+$upscope $end
+$scope module DataMemory $end
+$var wire 64 H ALUResult [63:0] $end
+$var wire 1 7 MemRead $end
+$var wire 1 6 MemWrite $end
+$var wire 1 $ clk $end
+$var wire 1 % reset $end
+$var wire 64 I ReadData2 [63:0] $end
+$var reg 64 J ReadData [63:0] $end
+$upscope $end
+$scope module ImmGen $end
+$var wire 32 K instruction [31:0] $end
+$var reg 64 L signExtend [63:0] $end
+$upscope $end
+$scope module ImmShiftedOneLeft $end
+$var wire 64 M signExtend [63:0] $end
+$var reg 64 N result [63:0] $end
+$upscope $end
+$scope module InstructionMemory $end
+$var wire 64 O PC [63:0] $end
+$var reg 32 P instruction [31:0] $end
+$upscope $end
+$scope module PC_4 $end
+$var wire 64 Q PC [63:0] $end
+$var reg 64 R sum [63:0] $end
+$upscope $end
+$scope module PC_Branch $end
+$var wire 1 & ANDBranch $end
+$var wire 64 S PC [63:0] $end
+$var wire 1 $ clk $end
+$var wire 64 T shiftValue [63:0] $end
+$var reg 64 U sum [63:0] $end
+$upscope $end
+$scope module PC_datapath $end
+$var wire 1 % reset $end
+$var reg 64 V PC [63:0] $end
+$var reg 64 W nextPC [63:0] $end
+$upscope $end
+$scope module Regs $end
+$var wire 5 X ReadReg1 [4:0] $end
+$var wire 5 Y ReadReg2 [4:0] $end
+$var wire 5 Z RegWrite [4:0] $end
+$var wire 1 1 WriteReg $end
+$var wire 1 $ clk $end
+$var wire 1 % reset $end
+$var wire 64 [ WriteData [63:0] $end
+$var reg 64 \ ReadData1 [63:0] $end
+$var reg 64 ] ReadData2 [63:0] $end
+$upscope $end
+$scope module muxALU $end
+$var wire 1 : ALUSrc $end
+$var wire 64 ^ ReadData2 [63:0] $end
+$var wire 64 _ signExtend [63:0] $end
+$var reg 64 ` muxResult [63:0] $end
+$upscope $end
+$scope module muxDataMem $end
+$var wire 64 a ALUResult [63:0] $end
+$var wire 1 5 MemtoReg $end
+$var wire 64 b ReadData [63:0] $end
+$var reg 64 c muxDataResult [63:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx c
+bx b
+bx a
+bx `
+bx _
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ^
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ]
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx \
+bx [
+bz Z
+bx Y
+bx X
+bx W
+bx V
+bx U
+bx T
+bx S
+bx R
+bx Q
+bx P
+bx O
+bx N
+bx M
+bx L
+bx K
+bx J
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx I
+bx H
+bx G
+bx F
+bx E
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx D
+bx C
+bx B
+bx A
+bx @
+bx ?
+bx >
+bx =
+bx <
+bx ;
+x:
+09
+x8
+x7
+x6
+x5
+bx 4
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 3
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 2
+x1
+00
+bx /
+bx .
+bx -
+bx ,
+bx +
+bx *
+bx )
+bz (
+bx '
+z&
+x%
+x$
+bx #
+bx "
+bx !
+$end
+#1
+0$
+#2
+b111000000000001000100110 +
+b111000000000001000100110 N
+b111000000000001000100110 T
+b11100000000000100010011 *
+b11100000000000100010011 L
+b11100000000000100010011 M
+b11100000000000100010011 _
+b100 R
+b0 >
+b0 ?
+b10000 Y
+b11 X
+b10011 F
+b11100000000000100010011 !
+b11100000000000100010011 /
+b11100000000000100010011 K
+b11100000000000100010011 P
+b0 "
+b0 ,
+b0 O
+b0 Q
+b0 W
+1%
+1$
+#3
+0$
+#4
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0 +
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0 N
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0 T
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx *
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx L
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx M
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx _
+bx R
+bx >
+bx ?
+bx Y
+bx X
+bx F
+bx !
+bx /
+bx K
+bx P
+bx "
+bx ,
+bx O
+bx Q
+bx W
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 2
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx I
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ]
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ^
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 3
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx D
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx \
+0%
+1$
+#5
+0$
+#6
+1$
+#7
+0$
+#8
+1$
+#9
+0$
+#10
+1$
+#11
+0$
+#12
+1$
+#13
+0$
+#14
+1$
+#15
+0$
+#16
+1$
+#17
+0$
+#18
+1$
+#19
+0$
+#20
+1$
+#21
+0$
+#22
+1$
+#23
+0$
+#24
+1$
+#25
+0$
+#26
+1$
+#27
+0$
+#28
+1$
+#29
+0$
+#30
+1$
+#31
+0$
+#32
+1$
+#33
+0$
+#34
+1$
+#35
+0$
+#36
+1$
+#37
+0$
+#38
+1$
+#39
+0$
+#40
+1$
+#41
+0$
+#42
+1$
+#43
+0$
+#44
+1$
+#45
+0$
+#46
+1$
+#47
+0$
+#48
+1$
+#49
+0$
+#50
+1$
+#51
+0$
+#52
+1$
+#53
+0$
+#54
+1$
+#55
+0$
+#56
+1$
+#57
+0$
+#58
+1$
+#59
+0$
+#60
+1$
+#61
+0$
+#62
+1$
+#63
+0$
+#64
+1$
+#65
+0$
+#66
+1$
+#67
+0$
+#68
+1$
+#69
+0$
+#70
+1$
+#71
+0$
+#72
+1$
+#73
+0$
+#74
+1$
+#75
+0$
+#76
+1$
+#77
+0$
+#78
+1$
+#79
+0$
+#80
+1$
+#81
+0$
+#82
+1$
+#83
+0$
+#84
+1$
+#85
+0$
+#86
+1$
+#87
+0$
+#88
+1$
+#89
+0$
+#90
+1$
+#91
+0$
+#92
+1$
+#93
+0$
+#94
+1$
+#95
+0$
+#96
+1$
+#97
+0$
+#98
+1$
+#99
+0$
+#100
+1$
+#101
+0$
+#102
+1$
+#103
+0$
+#104
+1$
+#105
+0$
+#106
+1$
+#107
+0$
+#108
+b111000000000001000100110 +
+b111000000000001000100110 N
+b111000000000001000100110 T
+b11100000000000100010011 *
+b11100000000000100010011 L
+b11100000000000100010011 M
+b11100000000000100010011 _
+b100 R
+b0 >
+b0 ?
+b10000 Y
+b11 X
+b10011 F
+b11100000000000100010011 !
+b11100000000000100010011 /
+b11100000000000100010011 K
+b11100000000000100010011 P
+b0 "
+b0 ,
+b0 O
+b0 Q
+b0 W
+1%
+1$
+#109
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0 +
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0 N
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0 T
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx *
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx L
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx M
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx _
+bx R
+bx >
+bx ?
+bx Y
+bx X
+bx F
+bx !
+bx /
+bx K
+bx P
+bx "
+bx ,
+bx O
+bx Q
+bx W
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 2
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx I
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ]
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ^
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 3
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx D
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx \
+0%
+0$
+#110

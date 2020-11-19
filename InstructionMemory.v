@@ -2,17 +2,11 @@ module InstructionMemory (PC, instruction);
   
   input wire [63:0]PC;
   output reg [31:0]instruction;
+  reg [31:0]MemInstr[13:0];
 
-  /*always @ (*) begin
-    case (addressPC)
-
-      64'b0000000000000000000000000000000000000000000000000000000000000000: instruction <= 64'b0000000000000000000000000000000000000000000100000000000100110011;// Tipo R - add x2, x0, x1
-
-    endcase
-  end
-  */
-
-	always @(*)begin
-		$readmemb("binario.asm", instruction);
+  
+	always @(PC)begin
+		$readmemb("binario.asm", MemInstr);
+    instruction = MemInstr[PC];
 	end
 endmodule
