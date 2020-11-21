@@ -3,9 +3,11 @@ module DataMemory(ALUResult, ReadData2, MemWrite, MemRead, ReadData, clk, reset)
     input wire [63:0]ALUResult, ReadData2;
     input wire MemWrite, MemRead, clk, reset;
     output reg [63:0]ReadData;
-    reg [31:0]MemReg[63:0];
+    reg [63:0]MemReg[31:0];
 
-
+    initial begin
+        $readmemb("data.txt", MemReg);
+    end
 
     always @(posedge clk) begin
         if (reset) begin // tem que testar
@@ -46,13 +48,15 @@ module DataMemory(ALUResult, ReadData2, MemWrite, MemRead, ReadData, clk, reset)
         else begin
             if(MemWrite) begin //load
                 //MemReg[ALUResult] <= WriteData; //Registrador[endereco] = Dado
-                MemReg[ALUResult] <= ReadData2; //ReadData2 e o WriteData do diagrama
-            end
-            else if(MemRead) begin //store
-                ReadData <= MemReg[ALUResult]; //Memoria = Registrador[endereco]
+                MemReg[ALUResult>>3] <= ReadData2; //ReadData2 e o WriteData do diagrama
             end
         end
+    end
 
+    always @(*) begin
+        if(MemRead) begin //store
+                ReadData <= MemReg[ALUResult>>3]; //Memoria = Registrador[endereco]
+            end
     end
 
 endmodule
@@ -72,7 +76,4 @@ module muxDataMem(ReadData, ALUResult, MemtoReg, muxDataResult);
             muxDataResult <= ALUResult;
         end
     end
-
 endmodule
-
-//regs[WriteReg] <= muxResult; muxResult == WriteData

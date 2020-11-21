@@ -1,4 +1,3 @@
-
 module muxALU(ReadData2, signExtend, ALUSrc, muxResult);
 
 	input wire [63:0]ReadData2, signExtend;
@@ -11,7 +10,6 @@ module muxALU(ReadData2, signExtend, ALUSrc, muxResult);
 			1: muxResult <= signExtend;
 		endcase
 	end
-
 endmodule
 
 
@@ -43,7 +41,6 @@ module ALUValues (ReadData1, muxResult, ALUCtrl, ALUResult, Zero);
 		else begin
 			Zero <= 0;
 		end
-
 	end
-
 endmodule
+
