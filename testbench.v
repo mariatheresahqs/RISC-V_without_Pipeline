@@ -15,15 +15,24 @@ module testbench ();
     $dumpvars(0, testbench);
     $display("Exibindo os resultados:");
     clk = 0;
-    #1; $monitor("Instruction: %b\nExit PC: %b\nExit ALU: %b\n",instruction, PC, ALUResult);
-    #1; $monitor("ReadReg1: %b\nReadReg2: %b\nRegWrite: %b\n",ReadReg1, ReadReg2, RegWrite);
-
-    #300000 $finish;
+    //#1; $monitor("\n");
+    //#1; $monitor("ReadReg1: %b\nReadReg2: %b\nRegWrite: %b\n",ReadReg1, ReadReg2, RegWrite);
+    //#1; $monitor("Instruction: %b\nExit PC: %b\nExit ALU: %b\n",instruction, PC, ALUResult);
+    #300 $finish;
   end
 
+/*
+  always @(posedge clk)begin
+    clk = 0;
+    //#1; $monitor("ReadReg1: %b\nReadReg2: %b\nRegWrite: %b\nInstruction: %b\nExit PC: %b\nExit ALU: %b\n",ReadReg1, ReadReg2, RegWrite, instruction, PC, ALUResult);
+    //#1; $monitor("Instruction: %b\nExit PC: %b\nExit ALU: %b\n",instruction, PC, ALUResult);
+    #300 $finish;
+  end
+*/
   always begin
     #10 clk = ~clk;
   end
+
 
 /*  initial begin
     #1; clk = 0;

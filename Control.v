@@ -31,7 +31,7 @@ module Control (OpCode, ALUSrc, MemtoReg, RegWrite, MemRead, MemWrite, Branch, A
       Branch <= 0;
       ALUOp <= 2'b00;
     end
-    else if(OpCode == 7'b1100111) begin // Tipo branch - BEQ
+    else if(OpCode == 7'b1100011) begin // Tipo branch - BEQ - Dener falou que era 1100111
       ALUSrc <= 0;
       MemtoReg <= 0; // don't care
       RegWrite <= 0;

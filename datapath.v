@@ -19,6 +19,8 @@ module datapath (clk, reset, nextPC, ALUResult, instruction);
   wire [1:0]ALUOp; // instrucoes de controle
   wire [3:0]ALUCtrl; 
 
+  //reg [63:0]MemReg[31:0];
+
   //-----------------------------------------------------------------
   // Program Counter Modules
   //-----------------------------------------------------------------

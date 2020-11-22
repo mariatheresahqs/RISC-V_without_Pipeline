@@ -4,11 +4,31 @@ module DataMemory(ALUResult, ReadData2, MemWrite, MemRead, ReadData, clk, reset)
     input wire MemWrite, MemRead, clk, reset;
     output reg [63:0]ReadData;
     reg [63:0]MemReg[31:0];
+    
+    integer i;
 
+    /*
+    reg [63:0]outMem[31:0];
+
+    integer i;
+    */
     initial begin
+        /*
+        for (i = 0; i < 32 ; i++) begin
+            assign outMem = {[63:0]MemReg[i]};   
+        end
+    */
         $readmemb("data.txt", MemReg);
     end
 
+    //initial begin
+        /*
+    always @(posedge clk)begin
+        for (i = 0; i < 32; i++ ) begin
+            $display("Mem[%0d] = %0b", i, MemReg[i]);
+        end
+    end
+    */
     always @(posedge clk) begin
         if (reset) begin // tem que testar
             MemReg[0] <= 64'd0;
@@ -57,6 +77,10 @@ module DataMemory(ALUResult, ReadData2, MemWrite, MemRead, ReadData, clk, reset)
         if(MemRead) begin //store
                 ReadData <= MemReg[ALUResult>>3]; //Memoria = Registrador[endereco]
             end
+        for (i = 0; i < 32; i++ ) begin
+            $display("Mem[%0d] = %0b", i, MemReg[i]);
+        end
+            $display("\n");
     end
 
 endmodule
