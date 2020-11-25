@@ -2,7 +2,8 @@ module InstructionMemory (PC, instruction);
   
   input wire [63:0]PC;
   output reg [31:0]instruction;
-  reg [31:0]MemInstr[12:0];
+  reg [31:0]MemInstr[31:0]; 
+  
 
 	initial begin
 		$readmemb("binario.asm", MemInstr);

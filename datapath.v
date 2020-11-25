@@ -19,14 +19,10 @@ module datapath (clk, reset, nextPC, ALUResult, instruction);
   wire [1:0]ALUOp; // instrucoes de controle
   wire [3:0]ALUCtrl; 
 
-  //reg [63:0]MemReg[31:0];
-
   //-----------------------------------------------------------------
   // Program Counter Modules
   //-----------------------------------------------------------------
-  //PC PC_datapath (.PC(PC), .reset(reset), .nextPC(nextPC));
-  //Sum4 PC_4 (.PC(nextPC), .sum(PC));
-  ResultPC PC_Branch (.PC(nextPC), .shiftValue(shiftValue), .sum(nextPC), .ANDBranch(1'b0), .clk(clk));
+  ResultPC PC_Branch (.PC(nextPC), .shiftValue(shiftValue), .sum(nextPC), .ANDBranch(Branch), .clk(clk));
   ShiftLeft ImmShiftedOneLeft (.signExtend(signExtend), .result(shiftValue));
   BranchAND BranchAND(.Zero(Zero), .Branch(Branch), .ANDResult(ANDResult));
   //-----------------------------------------------------------------
